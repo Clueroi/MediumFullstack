@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import z from 'zod'
-import { createGoal } from '../../use-cases/create-goal'
+import { createGoalUseCase } from '../../use-cases/create-goal'
 
 export async function CreateGoal(request: FastifyRequest, reply: FastifyReply) {
   const createGoalSchema = z.object({
@@ -11,7 +11,7 @@ export async function CreateGoal(request: FastifyRequest, reply: FastifyReply) {
   const { title, desiredWeeklyFrequency } = createGoalSchema.parse(request.body)
 
   try {
-    await createGoal({
+    await createGoalUseCase({
       title,
       desiredWeeklyFrequency,
     })
